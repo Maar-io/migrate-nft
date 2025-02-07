@@ -6,6 +6,7 @@ export default defineConfig({
   base: '/migrate-nft/',
   build: {
     outDir: 'docs',
-    emptyOutDir: true
+    emptyOutDir: true,
+    copyPublicDir: true
   }
 })
