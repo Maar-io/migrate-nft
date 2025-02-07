@@ -23,11 +23,12 @@ const AddressInput: React.FC<AddressInputProps> = ({ onAddressChange }) => {
   }
 
   return (
-    <div style={{ padding: '1rem' }}>
+    <div>
       <label style={{
         display: 'block',
         marginBottom: '0.5rem',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center'
       }}>
         Address
       </label>
@@ -39,10 +40,12 @@ const AddressInput: React.FC<AddressInputProps> = ({ onAddressChange }) => {
           validateAddress(e.target.value)
         }}
         style={{
-          width: '100%',
+          width: '45ch',
+          fontSize: '16px',
           padding: '0.5rem',
           border: '1px solid #999999',
-          borderRadius: '4px'
+          borderRadius: '4px',
+          fontFamily: 'monospace'
         }}
         placeholder="0x..."
       />
@@ -50,7 +53,8 @@ const AddressInput: React.FC<AddressInputProps> = ({ onAddressChange }) => {
         <div style={{
           color: 'red',
           fontSize: '0.875rem',
-          marginTop: '0.5rem'
+          marginTop: '0.5rem',
+          textAlign: 'center'
         }}>
           {error}
         </div>
