@@ -27,6 +27,7 @@ const AddressInput: React.FC<AddressInputProps> = ({ onAddressChange }) => {
       <label style={{
         display: 'block',
         marginBottom: '0.5rem',
+        marginTop: '2rem',
         fontWeight: 'bold',
         textAlign: 'center'
       }}>
