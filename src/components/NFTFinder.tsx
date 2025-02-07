@@ -34,7 +34,14 @@ const NFTFinder: React.FC<NFTFinderProps> = ({ address }) => {
   if (loading) return <div>Searching...</div>;
 
   return (
-    <div>
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+      gap: '1rem',
+      padding: '1rem',
+      width: '100%',
+      boxSizing: 'border-box'
+    }}>
       {matches.map((match) => (
         <NFTMatchCard
           key={`${match.project}-${match.tokenId}`}
