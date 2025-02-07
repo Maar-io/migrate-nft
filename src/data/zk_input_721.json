@@ -1,10 +1,12 @@
 {
   "casio": {
     "address": "0x35EdfFB12F93253f1c567a7e207F06E1B0de9D8e",
-    "tokenURIchangeNeeded": "7 meta"
-  },
-  "origamiKokyo": {
+    "tokenURIchangeNeeded": "7 meta",
+    "logoUrl": "https://twigglemagazine.com/April-activities/images/a_squarelesson_large.jpg"
+},
+"origamiKokyo": {
     "address": "0xD524DD5ca9272BEE145c6577910448421e1F5e69",
-    "tokenURIchangeNeeded": "NO EXTENSION"
+    "tokenURIchangeNeeded": "NO EXTENSION",
+    "logoUrl": "https://www.whimsyclips.com/cdn/shop/products/real-world-square-2D-shapes-clip-art-01.png"
   }
 }

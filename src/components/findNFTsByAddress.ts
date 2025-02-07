@@ -8,6 +8,7 @@ export interface NFTMatch {
 export interface ProjectConfig {
   address: string;
   tokenURIchangeNeeded: string;
+  logoUrl?: string;
 }
 
 export const findNFTsByAddress = async (address: string): Promise<NFTMatch[]> => {

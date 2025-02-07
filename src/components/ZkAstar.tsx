@@ -1,5 +1,5 @@
 import ScanButton from './ScanButton'
-import ZkNFTFinder from './ZkNFTFinder';
+import NFTFinder from './NFTFinder';
 
 interface ZkAstarProps {
   scannedAddress: string;
@@ -32,8 +32,8 @@ const ZkAstar: React.FC<ZkAstarProps> = ({
           }}>
             <ScanButton onClick={onScan} />
           </div>
-          {scannedAddress && <ZkNFTFinder address={scannedAddress} />}
-        </div>
+          {scannedAddress && <NFTFinder address={scannedAddress} />}
+          </div>
       );
 }
 
