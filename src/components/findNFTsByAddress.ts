@@ -21,7 +21,7 @@ export const findNFTsByAddress = async (address: string): Promise<NFTMatch[]> =>
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const csvText = await response.text();
       
       const lines = csvText.split('\n').slice(1); // Skip header
@@ -31,7 +31,7 @@ export const findNFTsByAddress = async (address: string): Promise<NFTMatch[]> =>
         const [csvAddress, tokenId] = line.split(',');
         if (csvAddress.toLowerCase() === address.toLowerCase()) {
           matches.push({ project, tokenId });
-          console.log(`Found match for ${project} with token ID ${tokenId}`);
+          // console.log(`Found match for ${project} with token ID ${tokenId}`);
         }
       }
     } catch (error) {
