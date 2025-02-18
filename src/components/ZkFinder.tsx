@@ -56,7 +56,7 @@ const ZkFinder: React.FC<NFTFinderProps> = ({ address }) => {
               project={match.project}
               tokenId={match.tokenId}
               amount={"1"}
-              verified={true}
+              verified={undefined}
               />
             ))}
           {matches1155.map((match) => (
@@ -65,7 +65,7 @@ const ZkFinder: React.FC<NFTFinderProps> = ({ address }) => {
             project={match.project}
             tokenId={match.tokenId}
             amount={match.amount}
-            verified={true}
+            verified={undefined}
             />
           ))}
         </div>

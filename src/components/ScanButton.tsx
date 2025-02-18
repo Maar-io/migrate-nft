@@ -8,7 +8,7 @@ const ScanButton: React.FC<ScanButtonProps> = ({ onClick }) => {
       onClick={onClick}
       style={{
         padding: '0.5rem 1rem',
-        marginTop: '2rem',
+        marginTop: '4rem',
         marginLeft: '0.5rem',
         fontSize: '16px',
         borderRadius: '4px',

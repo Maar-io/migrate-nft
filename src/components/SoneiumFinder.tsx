@@ -48,7 +48,6 @@ const SoneiumFinder: React.FC<NFTFinderProps> = ({ address }) => {
         <div>
           {matches.length > 0 && (
             <div>
-              <h3>ERC721 Tokens</h3>
               <NftCheckOnline721 
                 matches721={matches} 
                 address={address} 
@@ -57,7 +56,6 @@ const SoneiumFinder: React.FC<NFTFinderProps> = ({ address }) => {
           )}
           {matches1155.length > 0 && (
             <div>
-              <h3>ERC1155 Tokens</h3>
               <NftCheckOnline1155 
                 matches1155={matches1155} 
                 address={address} 
