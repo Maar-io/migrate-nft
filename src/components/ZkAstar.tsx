@@ -1,12 +1,10 @@
-import ScanButton from "./ScanButton";
-import NFTFinder from "./NFTFinder";
+import ZkFinder from "./ZkFinder";
 
 interface ZkAstarProps {
   scannedAddress: string;
-  onScan: () => void;
 }
 
-const ZkAstar: React.FC<ZkAstarProps> = ({ scannedAddress, onScan }) => {
+const ZkAstar: React.FC<ZkAstarProps> = ({ scannedAddress }) => {
   return (
     <div
       style={{
@@ -45,9 +43,8 @@ const ZkAstar: React.FC<ZkAstarProps> = ({ scannedAddress, onScan }) => {
           gap: "10px",
         }}
       >
-        <ScanButton onClick={onScan} />
       </div>
-      {scannedAddress && <NFTFinder address={scannedAddress} />}
+      {scannedAddress && <ZkFinder address={scannedAddress} />}
     </div>
   );
 };

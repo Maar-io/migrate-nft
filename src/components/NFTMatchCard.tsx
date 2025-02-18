@@ -2,24 +2,25 @@
 interface NFTMatchCardProps {
   project: string;
   tokenId: string;
-  amount?: string; // Optional for ERC1155
+  amount: string;
+  verified?: boolean;
 }
 
 const NFTMatchCard: React.FC<NFTMatchCardProps> = ({
   project,
   tokenId,
   amount,
+  verified,
 }) => {
   return (
-    <div
-      style={{
+    <div style={{
+      border: `2px solid ${verified === false ? 'red' : 'green'}`,
+      borderRadius: '8px',
         width: "300px",
         display: "flex",
         alignItems: "center",
         gap: "1rem",
         padding: "0.75rem",
-        border: "1px solid #999999",
-        borderRadius: "4px",
         margin: "0.5rem",
         boxSizing: "border-box"
       }}

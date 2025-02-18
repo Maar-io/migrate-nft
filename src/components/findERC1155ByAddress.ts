@@ -11,7 +11,7 @@ export const findERC1155ByAddress = async (address: string): Promise<ERC1155Matc
   const matches: ERC1155Match[] = [];
   
   for (const project of Object.keys(config1155)) {
-    console.log(`Checking ${project}_instances.csv`);
+    // console.log(`Checking ${project}_instances.csv`);
     try {
       const response = await fetch(`${import.meta.env.BASE_URL}instances/${project}_instances.csv`);
       if (!response.ok) {
@@ -27,7 +27,7 @@ export const findERC1155ByAddress = async (address: string): Promise<ERC1155Matc
         const [csvAddress, tokenId, amount] = line.split(',');
         if (csvAddress.toLowerCase() === address.toLowerCase()) {
           matches.push({ project, tokenId, amount });
-          console.log(`Found ERC1155 match for ${project} with token ID ${tokenId} (amount: ${amount})`);
+          // console.log(`Found ERC1155 match for ${project} with token ID ${tokenId} (amount: ${amount})`);
         }
       }
     } catch (error) {

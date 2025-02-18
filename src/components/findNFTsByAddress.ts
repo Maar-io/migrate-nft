@@ -14,7 +14,7 @@ export const findNFTsByAddress = async (address: string): Promise<NFTMatch[]> =>
   const matches: NFTMatch[] = [];
   
   for (const project of Object.keys(config)) {
-    console.log(`Checking ${project}_instances.csv`);
+    // console.log(`Checking ${project}_instances.csv`);
     try {
       // Add base URL to fetch path
       const response = await fetch(`${import.meta.env.BASE_URL}instances/${project}_instances.csv`);

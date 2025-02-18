@@ -7,7 +7,7 @@ interface NFTFinderProps {
   address: string;
 }
 
-const NFTFinder: React.FC<NFTFinderProps> = ({ address }) => {
+const ZkFinder: React.FC<NFTFinderProps> = ({ address }) => {
   const [matches, setMatches] = useState<NFTMatch[]>([]);
   const [matches1155, setMatches1155] = useState<ERC1155Match[]>([]);
   const [loading, setLoading] = useState(false);
@@ -16,14 +16,14 @@ const NFTFinder: React.FC<NFTFinderProps> = ({ address }) => {
     const searchNFTs = async () => {
       if (!address) return;
       setLoading(true);
-      console.log("Starting NFT search for address:", address); // Add this line
+      console.log("Starting zk NFT search for address:", address); // Add this line
       try {
         const [found721, found1155] = await Promise.all([
           findNFTsByAddress(address),
           findERC1155ByAddress(address),
         ]);
-        console.log("Found ERC721 NFTs:", found721);
-        console.log("Found ERC1155 NFTs:", found1155);
+        // console.log("Found ERC721 NFTs:", found721);
+        // console.log("Found ERC1155 NFTs:", found1155);
         setMatches(found721);
         setMatches1155(found1155);
       } catch (error) {
@@ -56,14 +56,16 @@ const NFTFinder: React.FC<NFTFinderProps> = ({ address }) => {
               project={match.project}
               tokenId={match.tokenId}
               amount={"1"}
-            />
-          ))}
+              verified={true}
+              />
+            ))}
           {matches1155.map((match) => (
             <NFTMatchCard
-              key={`1155-${match.project}-${match.tokenId}`}
-              project={match.project}
-              tokenId={match.tokenId}
-              amount={match.amount}
+            key={`1155-${match.project}-${match.tokenId}`}
+            project={match.project}
+            tokenId={match.tokenId}
+            amount={match.amount}
+            verified={true}
             />
           ))}
         </div>
@@ -74,4 +76,4 @@ const NFTFinder: React.FC<NFTFinderProps> = ({ address }) => {
   );
 };
 
-export default NFTFinder;
+export default ZkFinder;
