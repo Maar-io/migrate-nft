@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NFTMatch, findNFTsByAddress } from "./findNFTsByAddress";
 import { ERC1155Match, findERC1155ByAddress } from "./findERC1155ByAddress";
 import NftCheckOnline1155 from "./NftCheckOnline1155";
+import NftCheckOnline721 from "./NftCheckOnline721";
 
 interface NFTFinderProps {
   address: string;
@@ -44,10 +45,26 @@ const SoneiumFinder: React.FC<NFTFinderProps> = ({ address }) => {
       {loading ? (
         <div>Searching...</div>
       ) : matches.length > 0 || matches1155.length > 0 ? (
-        <NftCheckOnline1155 
-          matches1155={matches1155} 
-          address={address} 
-        />
+        <div>
+          {matches.length > 0 && (
+            <div>
+              <h3>ERC721 Tokens</h3>
+              <NftCheckOnline721 
+                matches721={matches} 
+                address={address} 
+              />
+            </div>
+          )}
+          {matches1155.length > 0 && (
+            <div>
+              <h3>ERC1155 Tokens</h3>
+              <NftCheckOnline1155 
+                matches1155={matches1155} 
+                address={address} 
+              />
+            </div>
+          )}
+        </div>
       ) : (
         address && <div>No NFTs found for this address</div>
       )}

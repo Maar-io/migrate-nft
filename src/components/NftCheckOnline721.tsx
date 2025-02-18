@@ -2,17 +2,14 @@ import { useState, useEffect } from "react";
 import { createPublicClient, http, Address } from "viem";
 import { soneium } from "viem/chains";
 import NFTMatchCard from "./NFTMatchCard";
-import contractsData from "../data/SoneiumContracts1155.json";
+import contractsData from "../data/SoneiumContracts721.json";
 
-// ABI for balanceOf function
+// ABI for ownerOf function
 const ABI = [
   {
-    inputs: [
-      { name: "account", type: "address" },
-      { name: "id", type: "uint256" },
-    ],
-    name: "balanceOf",
-    outputs: [{ name: "", type: "uint256" }],
+    inputs: [{ name: "tokenId", type: "uint256" }],
+    name: "ownerOf",
+    outputs: [{ name: "", type: "address" }],
     stateMutability: "view",
     type: "function",
   },
@@ -32,39 +29,32 @@ interface NFTMatch {
   tokenId: string;
 }
 
-interface ERC1155Match extends NFTMatch {
-  amount: string;
-}
-
 interface Props {
-  matches1155: ERC1155Match[];
+  matches721: NFTMatch[];
   address: string;
 }
 
+// Create client outside component to prevent recreating on every render
 const client = createPublicClient({
-    chain: soneium,
-    transport: http(),
-  });
+  chain: soneium,
+  transport: http(),
+});
 
-const NftCheckOnline1155: React.FC<Props> = ({
-  matches1155,
-  address,
-}) => {
+const NftCheckOnline721: React.FC<Props> = ({ matches721, address }) => {
   const [verifiedMatches, setVerifiedMatches] = useState<Map<string, boolean>>(
     new Map()
   );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const verifyBalances = async () => {
+    const verifyOwnership = async () => {
       const newVerifiedMatches = new Map<string, boolean>();
 
-      // Check ERC1155 matches
-      for (const match of matches1155) {
+      for (const match of matches721) {
         const contractInfo = (contractsData as ContractsData)[match.project];
         console.log("contractInfo:", contractInfo);
         
-        const key = `1155-${match.project}-${match.tokenId}`;
+        const key = `721-${match.project}-${match.tokenId}`;
         
         if (!contractInfo) {
           console.warn(`No contract info found for project: ${match.project}`);
@@ -73,26 +63,23 @@ const NftCheckOnline1155: React.FC<Props> = ({
         }
 
         try {
-          const onchainBalance = await client.readContract({
-
+          const onchainOwner = await client.readContract({
             address: contractInfo.address as Address,
             abi: ABI,
-            functionName: "balanceOf",
-            args: [address as Address, BigInt(match.tokenId)],
+            functionName: "ownerOf",
+            args: [BigInt(match.tokenId)],
           });
-          console.log(`address: ${address}, match.tokenId: ${match.tokenId}, onchainBalance: ${onchainBalance}`);
+          console.log(`Token ${match.tokenId} owner: ${onchainOwner}`);
 
-          const key = `1155-${match.project}-${match.tokenId}`;
           newVerifiedMatches.set(
             key,
-            onchainBalance.toString() === match.amount
+            onchainOwner.toLowerCase() === address.toLowerCase()
           );
         } catch (error) {
           console.error(
-            `Error verifying balance for ${match.project} token ${match.tokenId}:`,
+            `Error verifying ownership for ${match.project} token ${match.tokenId}:`,
             error
           );
-          const key = `1155-${match.project}-${match.tokenId}`;
           newVerifiedMatches.set(key, false);
         }
       }
@@ -101,11 +88,11 @@ const NftCheckOnline1155: React.FC<Props> = ({
       setLoading(false);
     };
 
-    verifyBalances();
-  }, [matches1155, address]);
+    verifyOwnership();
+  }, [matches721, address]);
 
   if (loading) {
-    return <div>Verifying NFT balances...</div>;
+    return <div>Verifying NFT ownership...</div>;
   }
 
   return (
@@ -117,20 +104,17 @@ const NftCheckOnline1155: React.FC<Props> = ({
         justifyContent: "flex-start",
       }}
     >
-
-      {matches1155.map((match) => (
+      {matches721.map((match) => (
         <NFTMatchCard
-          key={`1155-${match.project}-${match.tokenId}`}
+          key={`721-${match.project}-${match.tokenId}`}
           project={match.project}
           tokenId={match.tokenId}
-          amount={match.amount}
-          verified={verifiedMatches.get(
-            `1155-${match.project}-${match.tokenId}`
-          )}
+          amount="1"
+          verified={verifiedMatches.get(`721-${match.project}-${match.tokenId}`)}
         />
       ))}
     </div>
   );
 };
 
-export default NftCheckOnline1155;
+export default NftCheckOnline721;
