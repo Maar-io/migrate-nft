@@ -52,5 +52,14 @@
   },
   "UZNo": {
     "address": "0x8F82eAffabDAa7DeADEDb3BE97EE2d006320e67A"
+  },
+  "casio": {
+    "address": "0x9C7D4758a8a74fdE6516c16C91F8EF2C60081caB"
+  },
+  "Kamui": {
+    "address": "0x7c14C590D4cc6BDf3Fd9CCB16576C8f111b65c6E"
+  },
+  "AON": {
+    "address": "0xc202EB2073cC3A52c985f516D82EA725A6474202"
   }
 }
